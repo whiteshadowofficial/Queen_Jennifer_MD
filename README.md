@@ -13,15 +13,6 @@
 > If The Api Of This Bot Run Empty You Can Change it To Your Own Api By Changing [Here](https://github.com/nexusNw/Gojo-Satoru/blob/master/settings.js#L18) And Register [here](https://zenzapis.xyz/) to get apikey
 
 
-</br>
-
-<a href="https://github.com/nexusNw"><img title="Author" src="https://img.shields.io/badge/Author-nexusNw-blue.svg?color=54aeff&style=for-the-badge&logo=github" /></a>  
-<a href="https://github.com/nexusNw/Gojo-Satoru"><img title="Stars" src="https://img.shields.io/github/stars/nexusNw/Gojo-Satoru?color=54aeff&style=flat-square" /></a>
-<a href="https://github.com/nexusNw/Gojo-Satoru/network/members"><img title="Forks" src="https://img.shields.io/github/forks/nexusNw/Gojo-Satoru?color=54aeff&style=flat-square" /></a>
-<a href="https://github.com/nexusNw/Gojo-Satoru/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/nexusNw/Gojo-Satoru?label=watchers&color=54aeff&style=flat-square" /></a> <br>
-
----
-
 <!-- Requirements -->
 <b><details><summary>Requirements</summary></b>
 * Some Text Editor
@@ -65,10 +56,12 @@ Add FFmpeg to PATH environment variable
 > cd Gojo-Satoru
 > npm install
 ```
+
 </details>
 
 <!-- Edit -->
-<b><details><summary>Edit settings.js</summary></b>
+<details><summary>Edit settings.js</summary>
+
 ```bash
 global.APIKeys = {
 	'https://zenzapis.xyz': 'YOURAPIKEY',
@@ -89,11 +82,8 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 </details>
 
-----
+<details><summary>Available Features</summary>
 
-
-<b><details><summary>Available Features</summary><br>
-	
 | Features |  Availability |
 | :------: |  :----------: |
 |   Convert     |       ✅     |
@@ -115,24 +105,10 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 </details>
 
-
-----
-
-<!-- Contact Owner -->
-<b><details><summary>Contact</summary></b>
-
-## ```Connect With Me```
-<p align="center">
-<a href="https://wa.me/918129624000"><img src="https://img.shields.io/badge/Contact Nexus-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
-<a href="https://youtube.com/channel/UCqoUjPvDdb0kjXNYdvPPpHQ"><img src="https://img.shields.io/badge/Subscribe Nexus-ff0000?style=for-the-badge&logo=youtube&logoColor=ff000000&link=https://www.youtube.com/c/BOTINDO" /><br>
-</p>
-
-</details>
-
-
-</details><hr>
+===
 
 ## Thanks To
+
 * [`@adiwajshing/baileys`](https://github.com/adiwajshing/baileys)
 * [`Alien-Alfa`](https://github.com/Alien-Alfa)
 * [`DGXeon`](https://github.com/DGXeon)
