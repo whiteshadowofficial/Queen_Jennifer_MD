@@ -34,7 +34,6 @@ global.author = 'Dark_Ezio'
 global.sessionName = 'session'
 global.prefa = ['','!','.','🐦','🐤','🗿']
 global.sp = 'aidarkezio.github.io'
-globle.port = 3000
 global.mess = {
     success: 'Done ✓',
     admin: 'This Feature Is Only For Admin!',
