@@ -19,9 +19,9 @@ global.APIKeys = {
 }
 
 //customize settings\\
-global.owner = ['94781564565']
-global.premium = ['94781564565']
-global.ownernomer = '94781564565'
+global.owner = ['94761539856']
+global.premium = ['94761539856']
+global.ownernomer = '94761539856'
 global.ownername = 'Dark_Ezio'
 global.botname = 'Ai_Dark_Ezio_Wa-Bot'
 global.footer = '©Subadra_Poshitha.'
@@ -33,7 +33,7 @@ global.packname = 'Ai_Dark_Ezio_Wa-Bot'
 global.author = 'Dark_Ezio'
 global.sessionName = 'session'
 global.prefa = ['','!','.','🐦','🐤','🗿']
-global.sp = '⭔'
+global.sp = 'aidarkezio.github.io'
 global.mess = {
     success: 'Done ✓',
     admin: 'This Feature Is Only For Admin!',
