@@ -6,10 +6,28 @@
 //════════════════════════════//
 
 require('./settings')
-const { default: NexusNwIncConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
-const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
+const { default:
+    NexusNwIncConnect,
+    useSingleFileAuthState,
+    DisconnectReason,
+    fetchLatestBaileysVersion,
+    generateForwardMessageContent,
+    prepareWAMessageMedia,
+    generateWAMessageFromContent,
+    generateMessageID,
+    downloadContentFromMessage,
+    makeInMemoryStore,
+    jidDecode,
+    proto
+} = require("@adiwajshing/baileys")
+const {
+    state,
+    saveState
+} = useSingleFileAuthState(`./${sessionName}.json`) // useSingleFileAuthState(`./session.json`)
 const pino = require('pino')
-const { Boom } = require('@hapi/boom')
+const {
+    Boom
+} = require('@hapi/boom')
 const fs = require('fs')
 const yargs = require('yargs/yargs')
 const chalk = require('chalk')
@@ -17,8 +35,22 @@ const FileType = require('file-type')
 const path = require('path')
 // const http = require('http')
 const PhoneNumber = require('awesome-phonenumber')
-const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
-const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
+const {
+    imageToWebp,
+    videoToWebp,
+    writeExifImg,
+    writeExifVid
+} = require('./lib/exif')
+const {
+    smsg,
+    isUrl,
+    generateMessageTag,
+    getBuffer,
+    getSizeMedia,
+    fetchJson,
+    await,
+    sleep
+} = require('./lib/myfunc')
 print = console.log
 // const port = 3000
 var low
@@ -127,9 +159,11 @@ async function DarkEzio_Whats_Bot() {
         try {
             ppgc = await conn.profilePictureUrl(pea[0].id, 'image')
         } catch {
-            ppgc = 'https://shortlink.GojoMdNxarridho.my.id/rg1oT'
+            ppgc = 'https://raw.githubusercontent.com/AiDarkEzio/Whats-Bot/master/GojoMedia/D_E-DPC.jpg'
         }
+
         let wm_fatih = { url: ppgc }
+
         if (pea[0].announce == true) {
             conn.send5ButImg(pea[0].id, `「 Group Settings Changed 」\n\nThe Group Has Been Closed By Admin, Now Only Admin Can Send Messages !`, `Group Settings Change Message`, wm_fatih, [])
         } else if (pea[0].announce == false) {
@@ -143,11 +177,11 @@ async function DarkEzio_Whats_Bot() {
         }
     })
 
-    conn.ev.on('group-participants.update', async (anu) => {
-        print(anu)
+    conn.ev.on('group-participants.update', async (group) => {
+        print(group)
         try {
-            let metadata = await conn.groupMetadata(anu.id)
-            let participants = anu.participants
+            let metadata = await conn.groupMetadata(group.id)
+            let participants = group.participants
             for (let num of participants) {
                 // Get Profile Picture User
                 try {
@@ -158,7 +192,7 @@ async function DarkEzio_Whats_Bot() {
 
                 //Get Profile Picture Group\\
                 try {
-                    ppgroup = await conn.profilePictureUrl(anu.id, 'image')
+                    ppgroup = await conn.profilePictureUrl(group.id, 'image')
                 } catch {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
@@ -170,8 +204,8 @@ async function DarkEzio_Whats_Bot() {
                 Kon = await getBuffer(`https://hardianto.xyz/api/welcome3?profile=${encodeURIComponent(ppuser)}&name=${encodeURIComponent(nama)}&bg=https://telegra.ph/file/8bbe8a7de5c351dfcb077.jpg&namegb=${encodeURIComponent(metadata.subject)}&member=${encodeURIComponent(memb)}`)
 
                 Tol = await getBuffer(`https://hardianto.xyz/api/goodbye3?profile=${encodeURIComponent(ppuser)}&name=${encodeURIComponent(nama)}&bg=https://telegra.ph/file/8bbe8a7de5c351dfcb077.jpg&namegb=${encodeURIComponent(metadata.subject)}&member=${encodeURIComponent(memb)}`)
-                if (anu.action == 'add') {
-                    conn.sendMessage(anu.id, {
+                if (group.action == 'add') {
+                    conn.sendMessage(group.id, {
                         image: Kon, contextInfo: { mentionedJid: [num] }, caption: `
 ⭐✑ Hi👋 @${num.split("@")[0]},
 ⭐✑ Welcome To ${metadata.subject}
@@ -179,8 +213,8 @@ async function DarkEzio_Whats_Bot() {
 ⭐✑ Description: ${metadata.desc}
 
 ⭐✑ Welcome To Our Comfortable Happy😋, Sometimes Loud😜, Usually Messy🤥, Full Of Love🥰, HOME😌!!`})
-                } else if (anu.action == 'remove') {
-                    conn.sendMessage(anu.id, {
+                } else if (group.action == 'remove') {
+                    conn.sendMessage(group.id, {
                         image: Tol, contextInfo: { mentionedJid: [num] }, caption: `⭐✑ @${num.split("@")[0]} Left ${metadata.subject}
 
 ⭐✑ I'm Not Sure If It Was A Goodbye Charm, But It Was Fun While It Lasted 😌✨` })
@@ -261,32 +295,54 @@ async function DarkEzio_Whats_Bot() {
         const { connection, lastDisconnect } = update
         if (connection === 'close') {
             let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-            if (reason === DisconnectReason.badSession) { print(`Bad Session File, Please Delete Session and Scan Again`); conn.logout(); }
-            else if (reason === DisconnectReason.connectionClosed) { print("🐦Connection closed, reconnecting...."); startGojoMdNx(); }
-            else if (reason === DisconnectReason.connectionLost) { print("🐦Connection Lost from Server, reconnecting..."); startGojoMdNx(); }
-            else if (reason === DisconnectReason.connectionReplaced) { print("🐦Connection Replaced, Another New Session Opened, Please Close Current Session First"); conn.logout(); }
-            else if (reason === DisconnectReason.loggedOut) { print(`🐦Device Logged Out, Please Scan Again And Run.`); conn.logout(); }
-            else if (reason === DisconnectReason.restartRequired) { print("🐦Restart Required, Restarting..."); startGojoMdNx(); }
-            else if (reason === DisconnectReason.timedOut) { print("🐦Connection TimedOut, Reconnecting..."); startGojoMdNx(); }
-            else conn.end(`🐦Unknown DisconnectReason: ${reason}|${connection}`)
+
+            if (reason === DisconnectReason.badSession) { 
+                print(`Bad Session File, Please Delete Session and Scan Again`); 
+                conn.logout();
+            }
+            else if (reason === DisconnectReason.connectionClosed) {
+                print("🐦Connection closed, reconnecting...."); 
+                startGojoMdNx(); 
+            }
+            else if (reason === DisconnectReason.connectionLost) { 
+                print("🐦Connection Lost from Server, reconnecting..."); 
+                startGojoMdNx(); 
+            }
+            else if (reason === DisconnectReason.connectionReplaced) { 
+                print("🐦Connection Replaced, Another New Session Opened, Please Close Current Session First"); 
+                conn.logout(); 
+            }
+            else if (reason === DisconnectReason.loggedOut) { 
+                print(`🐦Device Logged Out, Please Scan Again And Run.`); 
+                conn.logout(); 
+            }
+            else if (reason === DisconnectReason.restartRequired) { 
+                print("🐦Restart Required, Restarting..."); 
+                startGojoMdNx(); 
+            }
+            else if (reason === DisconnectReason.timedOut) { 
+                print("🐦Connection TimedOut, Reconnecting..."); 
+                startGojoMdNx(); 
+            }
+            else conn.end(`🐦Unknown DisconnectReason: ${reason} | ${connection}`)
         }
-        print('Connected...')
         print('Connected...', update)
     })
 
     conn.ev.on('creds.update', saveState)
 
-    // Add Other
-    /** Send Button 5 Image
-     *
-     * @param {*} jid
-     * @param {*} text
-     * @param {*} footer
-     * @param {*} image
-     * @param [*] button
-     * @param {*} options
-     * @returns
-     */
+// Add Other
+
+/** Send Button 5 Image
+ *
+ * @param {*} jid
+ * @param {*} text
+ * @param {*} footer
+ * @param {*} image
+ * @param [*] button
+ * @param {*} options
+ * @returns
+ */
     conn.send5ButImg = async (jid, text = '', footer = '', img, but = [], options = {}) => {
         let message = await prepareWAMessageMedia({ image: img }, { upload: conn.waUploadToServer })
         var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
@@ -302,15 +358,15 @@ async function DarkEzio_Whats_Bot() {
         conn.relayMessage(jid, template.message, { messageId: template.key.id })
     }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} buttons 
-     * @param {*} caption 
-     * @param {*} footer 
-     * @param {*} quoted 
-     * @param {*} options 
-     */
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} buttons 
+ * @param {*} caption 
+ * @param {*} footer 
+ * @param {*} quoted 
+ * @param {*} options 
+ */
     conn.sendButtonText = (jid, buttons = [], text, footer, quoted = '', options = {}) => {
         let buttonMessage = {
             text,
@@ -322,25 +378,27 @@ async function DarkEzio_Whats_Bot() {
         conn.sendMessage(jid, buttonMessage, { quoted, ...options })
     }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} text 
-     * @param {*} quoted 
-     * @param {*} options 
-     * @returns 
-     */
-    conn.sendText = (jid, text, quoted = '', options) => conn.sendMessage(jid, { text: text, ...options }, { quoted })
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} text 
+ * @param {*} quoted 
+ * @param {*} options 
+ * @returns 
+ */
+    conn.sendText = (jid, text, quoted = '', options) => {
+        conn.sendMessage(jid, { text: text, ...options }, { quoted })
+    }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} path 
-     * @param {*} caption 
-     * @param {*} quoted 
-     * @param {*} options 
-     * @returns 
-     */
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} path 
+ * @param {*} caption 
+ * @param {*} quoted 
+ * @param {*} options 
+ * @returns 
+ */
     conn.sendImage = async (jid, path, caption = '', quoted = '', options) => {
         let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
@@ -360,38 +418,43 @@ async function DarkEzio_Whats_Bot() {
         return await conn.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted })
     }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} path 
-     * @param {*} quoted 
-     * @param {*} mime 
-     * @param {*} options 
-     * @returns 
-     */
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} path 
+ * @param {*} quoted 
+ * @param {*} mime 
+ * @param {*} options 
+ * @returns 
+ */
     conn.sendAudio = async (jid, path, quoted = '', ptt = false, options) => {
         let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         return await conn.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted })
     }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} text 
-     * @param {*} quoted 
-     * @param {*} options 
-     * @returns 
-     */
-    conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => conn.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} text 
+ * @param {*} quoted 
+ * @param {*} options 
+ * @returns 
+ */
+    conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => {
+        conn.sendMessage(jid, { 
+            text: text, contextInfo: { 
+                mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') 
+            }, ...options }, { quoted })
+        }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} path 
-     * @param {*} quoted 
-     * @param {*} options 
-     * @returns 
-     */
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} path 
+ * @param {*} quoted 
+ * @param {*} options 
+ * @returns 
+ */
     conn.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
@@ -405,14 +468,14 @@ async function DarkEzio_Whats_Bot() {
         return buffer
     }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} path 
-     * @param {*} quoted 
-     * @param {*} options 
-     * @returns 
-     */
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} path 
+ * @param {*} quoted 
+ * @param {*} options 
+ * @returns 
+ */
     conn.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
@@ -426,13 +489,13 @@ async function DarkEzio_Whats_Bot() {
         return buffer
     }
 
-    /**
-     * 
-     * @param {*} message 
-     * @param {*} filename 
-     * @param {*} attachExtension 
-     * @returns 
-     */
+/**
+ * 
+ * @param {*} message 
+ * @param {*} filename 
+ * @param {*} attachExtension 
+ * @returns 
+ */
     conn.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
         let quoted = message.msg ? message.msg : message
         let mime = (message.msg || message).mimetype || ''
@@ -461,16 +524,16 @@ async function DarkEzio_Whats_Bot() {
         return buffer
     }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} path 
-     * @param {*} filename
-     * @param {*} caption
-     * @param {*} quoted 
-     * @param {*} options 
-     * @returns 
-     */
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} path 
+ * @param {*} filename
+ * @param {*} caption
+ * @param {*} quoted 
+ * @param {*} options 
+ * @returns 
+ */
     conn.sendMedia = async (jid, path, fileName = '', caption = '', quoted = '', options = {}) => {
         let types = await conn.getFile(path, true)
         let { mime, ext, res, data, filename } = types
@@ -496,14 +559,14 @@ async function DarkEzio_Whats_Bot() {
         return fs.promises.unlink(pathFile)
     }
 
-    /**
-     * 
-     * @param {*} jid 
-     * @param {*} message 
-     * @param {*} forceForward 
-     * @param {*} options 
-     * @returns 
-     */
+/**
+ * 
+ * @param {*} jid 
+ * @param {*} message 
+ * @param {*} forceForward 
+ * @param {*} options 
+ * @returns 
+ */
     conn.copyNForward = async (jid, message, forceForward = false, options = {}) => {
         let vtype
         if (options.readViewOnce) {
@@ -540,7 +603,7 @@ async function DarkEzio_Whats_Bot() {
     }
 
     conn.cMod = (jid, copy, text = '', sender = conn.user.id, options = {}) => {
-        //let copy = message.toJSON()
+        // let copy = message.toJSON()
         let mtype = Object.keys(copy.message)[0]
         let isEphemeral = mtype === 'ephemeralMessage'
         if (isEphemeral) {
@@ -605,9 +668,6 @@ fs.watchFile(file, () => {
     require(file)
 })
 
-// module.exports = {
-//     toAudio,
-//     toPTT,
-//     toVideo,
-//     ffmpeg,
-//   }
+module.exports = {
+    DarkEzio_Whats_Bot
+  }
