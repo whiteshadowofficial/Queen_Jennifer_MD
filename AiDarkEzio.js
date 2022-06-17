@@ -27,7 +27,7 @@ const speed = require('performance-now')
 const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
-require('./config')
+require('./conf')
 const { 
     smsg, 
     formatp, 
@@ -114,7 +114,20 @@ const {
     getSapi,
     getGajah
 } = require('./storage/user/buruan.js');
-const { D_E_TMB, SEND_REED } = require('./config')
+
+const { 
+    D_E_TMB, 
+    SEND_REED, 
+    D_E_DPC
+} = require('./conf')
+
+const {
+    Bold,
+    Monospace,
+    Cut,
+    Italic,
+    Print
+} = require('./lib/plugin/msg_beautifuller')
 
 let DarahAwal = global.rpg.darahawal
 const isDarah = cekDuluJoinAdaApaKagaDiJson(m.sender)
@@ -162,7 +175,7 @@ let tebaklirik = db.data.game.lirik = []
 let tebaktebakan = db.data.game.tebakan = []
 let vote = db.data.others.vote = []
 
-module.exports = GojoMdNx = async (conn, m, chatUpdate, store) => {
+module.exports = DarkEzio_Whats_Bot = async (conn, m, chatUpdate, store) => {
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
@@ -228,7 +241,7 @@ module.exports = GojoMdNx = async (conn, m, chatUpdate, store) => {
             if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
             if (setting) {
                 if (!isNumber(setting.status)) setting.status = 0
-                if (!('autobio' in setting)) setting.autobio = false
+                if (!('autobio' in setting)) setting.autobio = false 
             }
             else global.db.data.settings[botNumber] = {
                 status: 0,
@@ -241,12 +254,13 @@ module.exports = GojoMdNx = async (conn, m, chatUpdate, store) => {
         }
 
         //group target \\
+
         const reply = (teks) => {
-            conn.sendMessage(m.chat, { text: teks, contextInfo: { "externalAdReply": { "title": ` ${global.botname}`, "body": ` Gojo-Satoru`, "previewType": "PHOTO", "thumbnailUrl": ``, "thumbnail": fs.readFileSync(`./GojoMedia/gojo.jpg`), "sourceUrl": D_E_TMB } } }, { quoted: m })
+            conn.sendMessage(m.chat, { text: teks, contextInfo: { "externalAdReply": { "title": ` ${global.botname}`, "body": ` DARK_EZIO`, "previewType": "PHOTO", "thumbnailUrl": ``, "thumbnail": fs.readFileSync(`./GojoMedia/gojo.jpg`), "sourceUrl": D_E_TMB } } }, { quoted: m })
         }
 
         const replay = (teks) => {
-            conn.sendMessage(m.chat, { text: teks, contextInfo: { "externalAdReply": { "title": ` ${global.botname}`, "body": ` Gojo-Satoru`, "previewType": "PHOTO", "thumbnailUrl": ``, "thumbnail": fs.readFileSync(`./GojoMedia/gojo.jpg`), "sourceUrl": D_E_TMB } } }, { quoted: m })
+            conn.sendMessage(m.chat, { text: teks, contextInfo: { "externalAdReply": { "title": ` ${global.botname}`, "body": ` DARK_EZIO`, "previewType": "PHOTO", "thumbnailUrl": ``, "thumbnail": fs.readFileSync(`./GojoMedia/gojo.jpg`), "sourceUrl": D_E_TMB } } }, { quoted: m })
         }
 
         //Public & Self\\
@@ -259,7 +273,12 @@ module.exports = GojoMdNx = async (conn, m, chatUpdate, store) => {
             if (SEND_REED) {
                 conn.sendReadReceipt(m.chat, m.sender, [m.key.id])
             }
-            console.log(chalk.black(chalk.bgWhite('[ MESSAGE ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> In'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
+            console.log(
+                chalk.black(chalk.bgWhite('[ MESSAGE ]')), 
+                chalk.black(chalk.bgGreen(new Date)), 
+                chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> From'), 
+                chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> In'), 
+                chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
         }
 
         //reset limit every 12 hours\\
@@ -1753,11 +1772,11 @@ ${vote[m.chat][2].map((v, i) => `┃╠ ${i + 1}. @${v.split`@`[0]}`).join('\n')
                 if (args[0] === "on") {
                     if (db.data.chats[m.chat].mute) return reply(`Previously Active`)
                     db.data.chats[m.chat].mute = true
-                    reply(`${conn.user.name} Has Been Muted In This Group !`)
+                    reply(Bold(`${conn.user.name} Has Been Muted In This Group !`))
                 } else if (args[0] === "off") {
                     if (!db.data.chats[m.chat].mute) return reply(`Previously Inactive`)
                     db.data.chats[m.chat].mute = false
-                    reply(`${conn.user.name} Has Been Unmuted In This Group!`)
+                    reply(Bold(`${conn.user.name} Has Been Unmuted In This Group!`))
                 } else {
                     let buttons = [
                         { buttonId: 'mute on', buttonText: { displayText: 'On' }, type: 1 },
@@ -1770,7 +1789,7 @@ ${vote[m.chat][2].map((v, i) => `┃╠ ${i + 1}. @${v.split`@`[0]}`).join('\n')
             case 'linkgroup': case 'linkgc': case 'gclink': case 'grouplink': {
                 if (!m.isGroup) return replay(`${mess.group}`)
                 let response = await conn.groupInviteCode(m.chat)
-                conn.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\n${groupMetadata.subject} Group Link`, m, { detectLink: true })
+                conn.sendText(m.chat, `➡${groupMetadata.subject} Group Link:\n\n🆔 https://chat.whatsapp.com/${response}`, m, { detectLink: true })
             }
                 break
             case 'ephemeral': {
@@ -1822,7 +1841,7 @@ ${vote[m.chat][2].map((v, i) => `┃╠ ${i + 1}. @${v.split`@`[0]}`).join('\n')
                             id: 'owner'
                         }
                     }]
-                    let txt = `「 GOJO-SATORU HERE🎉 」\n\n${text}`
+                    let txt = `「 DARK_EZIO HERE🎉 」\n\n${text}`
                     conn.send5ButImg(i, txt, conn.user.name, global.thumb, btn)
                 }
                 reply(`Successful Sending Broadcast To ${anu.length} Group(s)`)
@@ -1856,16 +1875,16 @@ ${vote[m.chat][2].map((v, i) => `┃╠ ${i + 1}. @${v.split`@`[0]}`).join('\n')
                             id: 'owner'
                         }
                     }]
-                    let txt = `「 Ai_Dark_Ezio HERE 🎉」\n\n${text}`
+                    let txt = `「 DARK_EZIO HERE 🎉」\n\n${text}`
                     conn.send5ButImg(yoi, txt, conn.user.name, global.thumb, btn)
                 }
                 reply('Broadcast Success')
             }
                 break
             case 'chatinfo': case 'infochat': {
-                if (!m.quoted) return reply(`Reply Message`)
+                if (!m.quoted) return reply(Italic(`Reply Message`))
                 let msg = await m.getQuotedObj()
-                if (!m.quoted.isBaileys) return replay(`The Message Was Not Sent By A Bot!`)
+                if (!m.quoted.isBaileys) return replay(Bold(`The Message Was Not Sent By A Bot!`))
                 let teks = ''
                 for (let i of msg.userReceipt) {
                     let read = i.readTimestamp
@@ -3599,13 +3618,13 @@ Report Message: ${text}`
             // #################################################################################
 
             case 'donasi': case 'donate': case 'sewabot': case 'sewa': {
-                conn.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/c15f725add0381fb69c4b.jpg' }, caption: `*Hi Bro ${m.pushName}*\nDonation section is currently down🥲 , I know you are happy but me 🥲💔\n` }, { quoted: m })
+                conn.sendMessage(m.chat, { image: { url: D_E_DPC }, caption: `*Hi Bro ${m.pushName}*\nDonation section is currently down🥲 , I know you are happy but me 🥲💔\n` }, { quoted: m })
             } break
 
             // #################################################################################
 
             case 'sc': case 'script': {
-                reply(`GitHub : https://github.com/nexusNw/Gojo-Satoru\n Dont Forget To Give Star\n\nYouTube : ${myweb}\nDont Forget To Watch Tutorial`)
+                reply(`GitHub : https://github.com/AiDarkEzio\n Dont Forget To Give Star\n\nYouTube : ${myweb}\nDont Forget To Watch Tutorial`)
             } break
 
             // #################################################################################
@@ -4256,11 +4275,24 @@ Report Message: ${text}`
             case 'thanksto': case 'tqto': case 'tqtt':
                 var unicorn = await getBuffer(picak + 'Developer')
                 await conn.send5ButImg(from, `` + '' + ' ', `
-Thanks to Me ( NexusNw)
+Thanks to Me ( Subadra Poshitha)
+Thanks to ( NexusNw)
 Alien-Alfa (For helping me to deploy qr in replit and answered my every doubts regard this project)
 DGXeon ( 45% Credits goes to him ,in this script)
 And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, unicorn, [{ "urlButton": { "displayText": "YouTube📍", "url": `${myweb}` } }, { "urlButton": { "displayText": "Script🔖", "url": `${sc}` } }, { "quickReplyButton": { "displayText": "🍜Donate🍜", "id": 'donate' } }, { "quickReplyButton": { "displayText": "👤Owner👤", "id": 'owner' } }])
                 break
+
+            case 'me':
+                if(isCreator) {
+                    const n = Bold('Subadra Poahitha')
+                replay(n)
+                }
+                else {
+                    reply(m)
+                }
+
+                break
+            
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return reply(mess.owner)
