@@ -4055,6 +4055,7 @@ Report Message: ${text}`
 ┃╠${prefix}umma [query]
 ┃╠${prefix}joox [query]
 ┃╠${prefix}soundcloud [url]
+┃╠${prefix}xn-play [url]
 ┃╚═════════════✪
 ┗━━「 ${pushname} 」━⭓`, unicorn, [{ "urlButton": { "displayText": "YouTube📍", "url": `${myweb}` } }, { "urlButton": { "displayText": "Script🔖", "url": `${sc}` } }, { "quickReplyButton": { "displayText": "🍜Donate🍜", "id": 'donate' } }, { "quickReplyButton": { "displayText": "👤Owner👤", "id": 'owner' } }])
                 break
@@ -4290,7 +4291,7 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                 if (!text) return reply(`Example: ${prefix + command} </url>`)
                 if (!isCreator) return replay(`${mess.owner}`)
                 try{
-                    let reslt = plugins.xnxx_dl(text).then(async reslt => {
+                    await plugins.xnxx_dl(text).then(async (reslt) => {
                         if (reslt.status == "OK") {
                             let buttons = [
                                 { buttonId: `dl-mp4 ${reslt.result.files.high}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
