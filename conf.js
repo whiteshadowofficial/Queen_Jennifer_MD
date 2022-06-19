@@ -17,6 +17,7 @@ let _url = '&url='
 let _api2_key2 = '4b412c'
 let _api_key2 = 'chan01'
 let sc = ''
+let _qure = '&query='
 let packname = 'Ai_Dark_Ezio_Wa-Bot'
 let SEND_REED = false
 let author = 'Dark_Ezio'
@@ -70,6 +71,7 @@ module.exports = {
     _dl,
     _api,
     _url,
+    _qure,
     D_E_DPC,
     D_E_DP_,
     D_E_TMB,
