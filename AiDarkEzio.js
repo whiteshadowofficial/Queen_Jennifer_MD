@@ -4298,14 +4298,14 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                     if (!error && res.statusCode == 200) {
                         if (body.status == "OK"){
                             let caption = `Xnxx Search Query : ${toUpper(text)}\n\n`
-                            for (i in body.reresult) {
+                            for (i in body.result) {
                                 caption += `⭔ Title : ${i.title}\n`
                                 caption += `⭔ Thumb : ${i.thumb}\n`
                                 caption += `⭔ Url : ${i.url}\n\n`
                             }
                             conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
-                        }else if (reslt.status == false) {     
-                            replay("From zenzapis:\n  " + Italic(reslt.message))
+                        }else if (body.status == false) {     
+                            replay("From zenzapis:\n  " + Italic(body.message))
                             return console.error("From zenzapis:\n  " + err);
                         }
                         else return reply('Code err')
@@ -4323,15 +4323,15 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                     if (!error && res.statusCode == 200) {
                         if (body.status == "OK"){
                             let caption = `Xvideos Search Query : ${toUpper(text)}\n\n`
-                            for (i in body.reresult) {
+                            for (i in body.result) {
                                 caption += `⭔ Title : ${i.title}\n`
                                 caption += `⭔ Time : ${i.duration}\n`
                                 caption += `⭔ Thumb : ${i.thumb}\n`
                                 caption += `⭔ Url : ${i.url}\n\n`
                             }
                             conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
-                        }else if (reslt.status == false) {     
-                            replay("From zenzapis:\n  " + Italic(reslt.message))
+                        }else if (body.status == false) {     
+                            replay("From zenzapis:\n  " + Italic(body.message))
                             return console.error("From zenzapis:\n  " + err);
                         }
                         else return reply('Code err')
