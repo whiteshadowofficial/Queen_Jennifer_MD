@@ -1,6 +1,8 @@
 const functions = require('../../lib/function')
 const myfunctions = require('../../lib/defunc')
+const https = require('https')
 const got = require("got");
+const { xnxx_dl } = require('..');
 
 // const { fetchUrl, isUrl } = require("../../lib/Function")
 
@@ -20,14 +22,3 @@ const got = require("got");
 // }
 // console.log(xnxx_dl('https://www.xnxx.com/video-15qwz1d8/18_year_old_sister_lost_her_virginity_with_her_step_brother_s_big_cock'))
 // 
-
-module.exports = xnxx_dl = async (url) => {
-    try{
-        const respo = await got(myfunctions.api_cret_url('downloader', 'xnxx', url)).then(async ok  => {
-            let resp = JSON.parse(ok.body);
-            return resp
-        });
-    } catch (err) {
-        console.log(err);
-    }
-}

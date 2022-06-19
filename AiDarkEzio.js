@@ -1,4 +1,6 @@
 require('./settings')
+const request = require('request');
+const myfunctions = require('./lib/defunc')
 const {
     BufferJSON,
     WA_DEFAULT_EPHEMERAL,
@@ -131,6 +133,7 @@ const {
 } = require('./lib/plugin/msg_beautifuller')
 const { config } = require('yargs')
 
+let options = {json: true};
 let DarahAwal = global.rpg.darahawal
 const isDarah = cekDuluJoinAdaApaKagaDiJson(m.sender)
 const isCekDarah = getDarah(m.sender)
@@ -4290,8 +4293,11 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
             case "xn-video": case "xn-play":
                 if (!text) return reply(`Example: ${prefix + command} </url>`)
                 if (!isCreator) return replay(`${mess.owner}`)
+                let _url = myfunctions.api_cret_url('downloader', 'xnxx', url)
                 try{
-                    await plugins.xnxx_dl(text).then(async (reslt) => {
+                    request(_url, options, (error, res, reslt) => {
+                        if (error) return  console.log(error)
+                        if (!error && res.statusCode == 200) {
                         if (reslt.status == "OK") {
                             let buttons = [
                                 { buttonId: `dl-mp4 ${reslt.result.files.high}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
@@ -4312,13 +4318,49 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                         } else if (!reslt.status) {     
                             return replay(Italic(reslt.message))
                         }
+                        };
                     });
-    
                 } catch (err) {
                     console.error(err);
                     reply(Italic(err))
                 }
                 break
+
+                case "xv-video": case "xv-play":
+                    if (!text) return reply(`Example: ${prefix + command} </url>`)
+                    if (!isCreator) return replay(`${mess.owner}`)
+                    _url = myfunctions.api_cret_url('downloader', 'xvideos', text)
+                    try{
+                        request(_url, options, (error, res, reslt) => {
+                            if (error) return  console.log(error)
+                            if (!error && res.statusCode == 200) {
+                            if (reslt.status == "OK") {
+                                let buttons = [
+                                    { buttonId: `dl-mp4 ${reslt.result.files.high}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
+                                    { buttonId: `dl-mp4 ${reslt.result.files.Low}`, buttonText: { displayText: '📽️Low quality📽️' }, type: 1 }
+                                ]
+                                let buttonMessage = {
+                                    image: { url: D_E_TMB },
+                                    caption: "\n🐦 Title : " + reslt.result.title + "\n" + 
+                                            '🐦 Ext : mp4' + "\n" + 
+                                            "🐦 Duration : " + reslt.result.duration + "\n" + 
+                                            "🐦 Info : " + reslt.result.info + "\n" + 
+                                            "🐦 Url : " + text + "\n",
+                                    footer: conn.user.name,
+                                    buttons: buttons,
+                                    headerType: 4
+                                }
+                                return conn.sendMessage(m.chat, buttonMessage, { quoted: m })
+                            } else if (!reslt.status) {     
+                                return replay(Italic(reslt.message))
+                            }
+                            };
+                        });
+                    } catch (err) {
+                        console.error(err);
+                        reply(Italic(err))
+                    }
+                    break
 
             default:
                 if (budy.startsWith('=>')) {
