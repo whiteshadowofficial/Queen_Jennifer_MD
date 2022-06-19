@@ -1,22 +1,22 @@
 require('./settings')
-const { 
-    BufferJSON, 
-    WA_DEFAULT_EPHEMERAL, 
-    generateWAMessageFromContent, 
-    proto, 
-    generateWAMessageContent, 
-    generateWAMessage, 
-    prepareWAMessageMedia, 
-    areJidsSameUser, 
-    getContentType 
+const {
+    BufferJSON,
+    WA_DEFAULT_EPHEMERAL,
+    generateWAMessageFromContent,
+    proto,
+    generateWAMessageContent,
+    generateWAMessage,
+    prepareWAMessageMedia,
+    areJidsSameUser,
+    getContentType
 } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
-const { 
-    exec, 
-    spawn, 
-    execSync 
+const {
+    exec,
+    spawn,
+    execSync
 } = require("child_process")
 const axios = require('axios')
 const path = require('path')
@@ -27,23 +27,24 @@ const speed = require('performance-now')
 const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
+const plugins = require('./commands')
 require('./conf')
-const { 
-    smsg, 
-    formatp, 
-    tanggal, 
-    formatDate, 
-    getTime, 
-    isUrl, 
-    sleep, 
-    clockString, 
-    runtime, 
-    fetchJson, 
-    getBuffer, 
-    jsonformat, 
-    format, 
-    parseMention, 
-    getRandom 
+const {
+    smsg,
+    formatp,
+    tanggal,
+    formatDate,
+    getTime,
+    isUrl,
+    sleep,
+    clockString,
+    runtime,
+    fetchJson,
+    getBuffer,
+    jsonformat,
+    format,
+    parseMention,
+    getRandom
 } = require('./lib/myfunc')
 const nexusnw = require('xfarr-api')
 
@@ -115,9 +116,9 @@ const {
     getGajah
 } = require('./storage/user/buruan.js');
 
-const { 
-    D_E_TMB, 
-    SEND_REED, 
+const {
+    D_E_TMB,
+    SEND_REED,
     D_E_DPC
 } = require('./conf')
 
@@ -128,6 +129,7 @@ const {
     Italic,
     Print
 } = require('./lib/plugin/msg_beautifuller')
+const { config } = require('yargs')
 
 let DarahAwal = global.rpg.darahawal
 const isDarah = cekDuluJoinAdaApaKagaDiJson(m.sender)
@@ -241,7 +243,7 @@ module.exports = DarkEzio_Whats_Bot = async (conn, m, chatUpdate, store) => {
             if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
             if (setting) {
                 if (!isNumber(setting.status)) setting.status = 0
-                if (!('autobio' in setting)) setting.autobio = false 
+                if (!('autobio' in setting)) setting.autobio = false
             }
             else global.db.data.settings[botNumber] = {
                 status: 0,
@@ -274,10 +276,10 @@ module.exports = DarkEzio_Whats_Bot = async (conn, m, chatUpdate, store) => {
                 conn.sendReadReceipt(m.chat, m.sender, [m.key.id])
             }
             console.log(
-                chalk.black(chalk.bgWhite('[ MESSAGE ]')), 
-                chalk.black(chalk.bgGreen(new Date)), 
-                chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> From'), 
-                chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> In'), 
+                chalk.black(chalk.bgWhite('[ MESSAGE ]')),
+                chalk.black(chalk.bgGreen(new Date)),
+                chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> From'),
+                chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> In'),
                 chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
         }
 
@@ -2144,7 +2146,7 @@ ${vote[m.chat][2].map((v, i) => `┃╠ ${i + 1}. @${v.split`@`[0]}`).join('\n')
                 if (!text) return reply(`Example : ${prefix + command} Stay`)
                 let yts = require("yt-search")
                 let search = await yts(text)
-                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                let anu = search.videos[0]
                 let buttons = [
                     { buttonId: `ytmp3 ${anu.url}`, buttonText: { displayText: '🎶Audio🎶' }, type: 1 },
                     { buttonId: `ytmp4 ${anu.url}`, buttonText: { displayText: '📽️Video📽️' }, type: 1 }
@@ -3695,6 +3697,7 @@ Report Message: ${text}`
 ┃╠${prefix}umma [query]
 ┃╠${prefix}joox [query]
 ┃╠${prefix}soundcloud [url]
+┃╠${prefix}xn-play [url]
 ┃╠══✪「 SEARCHER 」 ☯︎
 ┃╠${prefix}play [query]
 ┃╠${prefix}song [query]
@@ -4282,17 +4285,40 @@ DGXeon ( 45% Credits goes to him ,in this script)
 And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, unicorn, [{ "urlButton": { "displayText": "YouTube📍", "url": `${myweb}` } }, { "urlButton": { "displayText": "Script🔖", "url": `${sc}` } }, { "quickReplyButton": { "displayText": "🍜Donate🍜", "id": 'donate' } }, { "quickReplyButton": { "displayText": "👤Owner👤", "id": 'owner' } }])
                 break
 
-            case 'me':
-                if(isCreator) {
-                    const n = Bold('Subadra Poahitha')
-                replay(n)
-                }
-                else {
-                    reply(m)
-                }
 
+            case "xn-video": case "xn-play":
+                if (!text) return reply(`Example: ${prefix + command} </url>`)
+                if (!isCreator) return replay(`${mess.owner}`)
+                try{
+                    let reslt = plugins.xnxx_dl(text).then(async reslt => {
+                        if (reslt.status == "OK") {
+                            let buttons = [
+                                { buttonId: `dl-mp4 ${reslt.result.files.high}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
+                                { buttonId: `dl-mp4 ${reslt.result.files.Low}`, buttonText: { displayText: '📽️Low quality📽️' }, type: 1 }
+                            ]
+                            let buttonMessage = {
+                                image: { url: D_E_TMB },
+                                caption: "\n🐦 Title : " + reslt.result.title + "\n" + 
+                                        '🐦 Ext : mp4' + "\n" + 
+                                        "🐦 Duration : " + reslt.result.duration + "\n" + 
+                                        "🐦 Info : " + reslt.result.info + "\n" + 
+                                        "🐦 Url : " + text + "\n",
+                                footer: conn.user.name,
+                                buttons: buttons,
+                                headerType: 4
+                            }
+                            return conn.sendMessage(m.chat, buttonMessage, { quoted: m })
+                        } else if (!reslt.status) {     
+                            return replay(Italic(reslt.message))
+                        }
+                    });
+    
+                } catch (err) {
+                    console.error(err);
+                    reply(Italic(err))
+                }
                 break
-            
+
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return reply(mess.owner)
@@ -4360,7 +4386,7 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
 
 
     } catch (err) {
-        m.reply(util.format(err))
+        m.reply(util.format(Italic(err)))
     }
 }
 

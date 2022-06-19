@@ -1,3 +1,5 @@
+let _api_key1 = '4e5963'
+let _api2_key1 = 'sanzy'
 let owner = ['94761539856']
 let premium = ['94761539856']
 let ownernomer = '94761539856'
@@ -7,7 +9,13 @@ let footer = '©Subadra_Poshitha.'
 let ig = 'https://github.com/aidarkezio'
 let region = 'India, South India, Kerala'
 let myweb = 'https://aidarkezio.github.io'
+let _api_url = 'https://zenzapis.xyz/'
 let ytc = 'https://www.youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ'
+let _dl = 'downloader/'
+let _api = '?apikey='
+let _url = '&url='
+let _api_key2 = '4b412c'
+let _api2_key2 = 'chan01'
 let sc = ''
 let packname = 'Ai_Dark_Ezio_Wa-Bot'
 let SEND_REED = false
@@ -54,6 +62,14 @@ let flarun = 'https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=tr
 let flasmurf = 'https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=smurfs-logo&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&text='
 
 module.exports = {
+    _api_url,
+    _api_key1,
+    _api_key2,
+    _api2_key1,
+    _api2_key2,
+    _dl,
+    _api,
+    _url,
     D_E_DPC,
     D_E_DP_,
     D_E_TMB,
