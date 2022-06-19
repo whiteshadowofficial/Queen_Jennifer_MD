@@ -2191,8 +2191,7 @@ ${vote[m.chat][2].map((v, i) => `┃╠ ${i + 1}. @${v.split`@`[0]}`).join('\n')
                 let media = await ytv(text, quality)
                 if (media.filesize >= 999999) return reply('File Over Limit ' + util.format(media))
                 conn.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `🐦 Title : ${media.title}\n🐦 File Size : ${media.filesizeF}\n🐦 Url : ${isUrl(text)}\n🐦 Ext : MP3\n🐦 Resolution : ${args[1] || '360p'}` }, { quoted: m })
-            }
-                break
+            }break
             case 'getmusicxxx': {
                 let { yta } = require('./lib/y2mate')
                 let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
@@ -4300,8 +4299,8 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                         if (!error && res.statusCode == 200) {
                         if (reslt.status == "OK") {
                             let buttons = [
-                                { buttonId: `dl-mp4 ${reslt.result.files.high}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
-                                { buttonId: `dl-mp4 ${reslt.result.files.Low}`, buttonText: { displayText: '📽️Low quality📽️' }, type: 1 }
+                                { buttonId: `dl-mp4 ${reslt.result.files.high} ${reslt.result.title}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
+                                { buttonId: `dl-mp4 ${reslt.result.files.Low} ${reslt.result.title}`, buttonText: { displayText: '📽️Low quality📽️' }, type: 1 }
                             ]
                             let buttonMessage = {
                                 image: { url: D_E_TMB },
@@ -4315,18 +4314,20 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                                 headerType: 4
                             }
                             return conn.sendMessage(m.chat, buttonMessage, { quoted: m })
-                        } else if (!reslt.status) {     
-                            return replay(Italic(reslt.message))
+                        } else if (reslt.status == false) {     
+                            replay("From zenzapis:\n  " + Italic(reslt.message))
+                            return console.error("From zenzapis:\n  " + err);
                         }
+                        else return reply('Code err')
                         };
                     });
                 } catch (err) {
-                    console.error(err);
-                    reply(Italic(err))
+                    console.error("From code:\n  " + err);
+                    reply("From code:\n  " + Italic(err))
                 }
                 break
 
-                case "xv-video": case "xv-play":
+            case "xv-video": case "xv-play":
                     if (!text) return reply(`Example: ${prefix + command} </url>`)
                     if (!isCreator) return replay(`${mess.owner}`)
                     _url = myfunctions.api_cret_url('downloader', 'xvideos', text)
@@ -4336,8 +4337,8 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                             if (!error && res.statusCode == 200) {
                             if (reslt.status == "OK") {
                                 let buttons = [
-                                    { buttonId: `dl-mp4 ${reslt.result.files.high}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
-                                    { buttonId: `dl-mp4 ${reslt.result.files.Low}`, buttonText: { displayText: '📽️Low quality📽️' }, type: 1 }
+                                    { buttonId: `dl-mp4 ${reslt.result.files.high} ${reslt.result.title}`, buttonText: { displayText: '📽️High quality📽️' }, type: 1 },
+                                    { buttonId: `dl-mp4 ${reslt.result.files.Low} ${reslt.result.title}`, buttonText: { displayText: '📽️Low quality📽️' }, type: 1 }
                                 ]
                                 let buttonMessage = {
                                     image: { url: D_E_TMB },
@@ -4351,16 +4352,30 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                                     headerType: 4
                                 }
                                 return conn.sendMessage(m.chat, buttonMessage, { quoted: m })
-                            } else if (!reslt.status) {     
-                                return replay(Italic(reslt.message))
+                            } else if (reslt.status == false) {     
+                                replay("From zenzapis:\n  " + Italic(reslt.message))
+                                return console.error("From zenzapis:\n  " + err);
                             }
+                            else return reply('Code err')
                             };
                         });
                     } catch (err) {
-                        console.error(err);
-                        reply(Italic(err))
+                        replay("From code:\n  " + Italic(reslt.message))
+                        console.error("From code:\n  " + err);
                     }
                     break
+
+            case 'dl-mp4': {
+                try{
+                    if (!text) return reply(`Example : ${prefix + command} </Url> </tittle>`)
+                let title = args[1] ? args[1] : 'created-by-whatsapp-bot'
+                let vide_url = args[0] ? args[0] : 'true'
+                conn.sendMessage(m.chat, { video: { url: vide_url }, mimetype: 'video/mp4', fileName: `${title}.mp4`, caption: Bold(`Created By @Dark_Ezio_Whats-Bot`) }, { quoted: m })
+                
+                }catch (err){
+                    reply('code: ' + err)
+                }  
+            }break
 
             default:
                 if (budy.startsWith('=>')) {
@@ -4426,7 +4441,6 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                     conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
                 }
         }
-
 
     } catch (err) {
         m.reply(util.format(Italic(err)))
