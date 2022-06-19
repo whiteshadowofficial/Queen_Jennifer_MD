@@ -4293,24 +4293,29 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                 if (!text) return reply(`Example: ${prefix + command} </query>`)
                 if (!isCreator) return replay(`${mess.owner}`)
                 let _url = myfunctions.api_srh_url('searching', 'xnxx', text);
-                request(_url, options, (error, res, body) => {
-                    if (error) return  console.log(error); reply(Italic(error));
-                    if (!error && res.statusCode == 200) {
-                        if (body.status == "OK"){
-                            let caption = `Xnxx Search Query : ${toUpper(text)}\n\n`
-                            for (i in body.result) {
-                                caption += `⭔ Title : ${i.title}\n`
-                                caption += `⭔ Thumb : ${i.thumb}\n`
-                                caption += `⭔ Url : ${i.url}\n\n`
+                try{
+                    request(_url, options, (error, res, body) => {
+                        if (error) return  console.log(error); reply(Italic(error));
+                        if (!error && res.statusCode == 200) {
+                            if (body.status == "OK"){
+                                let caption = `Xnxx Search Query : ${toUpper(text)}\n\n`
+                                for (i in body.result) {
+                                    caption += `⭔ Title : ${i.title}\n`
+                                    caption += `⭔ Thumb : ${i.thumb}\n`
+                                    caption += `⭔ Url : ${i.url}\n\n`
+                                }
+                                conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
+                            }else if (body.status == false) {     
+                                replay("From zenzapis:\n  " + Italic(body.message))
+                                return console.error("From zenzapis:\n  " + err);
                             }
-                            conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
-                        }else if (body.status == false) {     
-                            replay("From zenzapis:\n  " + Italic(body.message))
-                            return console.error("From zenzapis:\n  " + err);
-                        }
-                        else return reply('Code err')
-                    };
-                });
+                            else return reply('Code err')
+                        };
+                    });
+                }catch(error){
+                    console.error("From code:\n  " + error);
+                    reply("From code:\n  " + Italic(error))
+                }
                  
             }break
 
@@ -4318,25 +4323,31 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                 if (!text) return reply(`Example: ${prefix + command} </query>`)
                 if (!isCreator) return replay(`${mess.owner}`)
                 _url = myfunctions.api_srh_url('searching', 'xvideos', text);
-                request(_url, options, (error, res, body) => {
-                    if (error) return  console.log(error); reply(Italic(error));
-                    if (!error && res.statusCode == 200) {
-                        if (body.status == "OK"){
-                            let caption = `Xvideos Search Query : ${toUpper(text)}\n\n`
-                            for (i in body.result) {
-                                caption += `⭔ Title : ${i.title}\n`
-                                caption += `⭔ Time : ${i.duration}\n`
-                                caption += `⭔ Thumb : ${i.thumb}\n`
-                                caption += `⭔ Url : ${i.url}\n\n`
+                try{
+                    request(_url, options, (error, res, body) => {
+                        if (error) return  console.log(error); reply(Italic(error));
+                        if (!error && res.statusCode == 200) {
+                            if (body.status == "OK"){
+                                let caption = `Xvideos Search Query : ${toUpper(text)}\n\n`
+                                for (i in body.result) {
+                                    caption += `⭔ Title : ${i.title}\n`
+                                    caption += `⭔ Time : ${i.duration}\n`
+                                    caption += `⭔ Thumb : ${i.thumb}\n`
+                                    caption += `⭔ Url : ${i.url}\n\n`
+                                }
+                                conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
+                            }else if (body.status == false) {     
+                                replay("From zenzapis:\n  " + Italic(body.message))
+                                return console.error("From zenzapis:\n  " + err);
                             }
-                            conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
-                        }else if (body.status == false) {     
-                            replay("From zenzapis:\n  " + Italic(body.message))
-                            return console.error("From zenzapis:\n  " + err);
-                        }
-                        else return reply('Code err')
-                    };
-                });
+                            else return reply('Code err')
+                        };
+                    });
+                }catch(error){
+                    console.error("From code:\n  " + error);
+                    reply("From code:\n  " + Italic(error))
+                }
+                
                  
             }break
             
@@ -4495,6 +4506,7 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
 
     } catch (err) {
         m.reply(util.format(Italic(err)))
+        console.log(err);
     }
 }
 
