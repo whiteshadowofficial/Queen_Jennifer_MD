@@ -4293,7 +4293,7 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
             case "xn-video": case "xn-play":
                 if (!text) return reply(`Example: ${prefix + command} </url>`)
                 if (!isCreator) return replay(`${mess.owner}`)
-                let _url = myfunctions.api_cret_url('downloader', 'xnxx', _url)
+                let _url = myfunctions.api_cret_url('downloader', 'xnxx', text)
                 try{
                     request(_url, options, (error, res, reslt) => {
                         if (error) return  console.log(error)
