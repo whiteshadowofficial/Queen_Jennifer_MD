@@ -4296,7 +4296,7 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                         if (error) return  console.log(error); reply(Italic(error));
                         if (!error && res.statusCode == 200) {
                             if (body.status == "OK"){
-                                let caption = `Xnxx Search Query : ${toUpper(text)}\n\n`
+                                let caption = `Xnxx Search Query : ${text}\n\n`
                                 for (i in body.result) {
                                     caption += `⭔ Title : ${i.title}\n`
                                     caption += `⭔ Thumb : ${i.thumb}\n`
@@ -4326,7 +4326,7 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                         if (error) return  console.log(error); reply(Italic(error));
                         if (!error && res.statusCode == 200) {
                             if (body.status == "OK"){
-                                let caption = `Xvideos Search Query : ${toUpper(text)}\n\n`
+                                let caption = `Xvideos Search Query : ${text}\n\n`
                                 for (i in body.result) {
                                     caption += `⭔ Title : ${i.title}\n`
                                     caption += `⭔ Time : ${i.duration}\n`
