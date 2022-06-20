@@ -302,27 +302,27 @@ async function DarkEzio_Whats_Bot() {
             }
             else if (reason === DisconnectReason.connectionClosed) {
                 print("🐦Connection closed, reconnecting...."); 
-                startGojoMdNx(); 
+                DarkEzio_Whats_Bot(); 
             }
             else if (reason === DisconnectReason.connectionLost) { 
                 print("🐦Connection Lost from Server, reconnecting..."); 
-                startGojoMdNx(); 
+                DarkEzio_Whats_Bot(); 
             }
             else if (reason === DisconnectReason.connectionReplaced) { 
                 print("🐦Connection Replaced, Another New Session Opened, Please Close Current Session First"); 
                 conn.logout(); 
             }
             else if (reason === DisconnectReason.loggedOut) { 
-                print(`🐦Device Logged Out, Please Scan Again And Run.`); 
+                print(`🐦Device Logged Out, Please Scan Again And Run.`);
                 conn.logout(); 
             }
             else if (reason === DisconnectReason.restartRequired) { 
                 print("🐦Restart Required, Restarting..."); 
-                startGojoMdNx(); 
+                DarkEzio_Whats_Bot(); 
             }
             else if (reason === DisconnectReason.timedOut) { 
                 print("🐦Connection TimedOut, Reconnecting..."); 
-                startGojoMdNx(); 
+                DarkEzio_Whats_Bot(); 
             }
             else conn.end(`🐦Unknown DisconnectReason: ${reason} | ${connection}`)
         }

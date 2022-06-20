@@ -29,7 +29,6 @@ const speed = require('performance-now')
 const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
-const plugins = require('./commands')
 require('./conf')
 const {
     smsg,
@@ -131,7 +130,6 @@ const {
     Italic,
     Print
 } = require('./lib/plugin/msg_beautifuller')
-const { config } = require('yargs')
 
 let options = {json: true};
 let DarahAwal = global.rpg.darahawal
