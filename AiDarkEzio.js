@@ -4302,7 +4302,19 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                                     caption += `⭔ Thumb : ${i.thumb}\n`
                                     caption += `⭔ Url : ${i.url}\n\n`
                                 }
-                                conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
+                                let buttons = [
+                                    { buttonId: `xn-video ${body.result[0].url}`, buttonText: { displayText: 'First Video📽️' }, type: 1 },
+                                    { buttonId: `xn-video ${body.result[1].url}`, buttonText: { displayText: 'Second Video📽️' }, type: 1 },
+                                    { buttonId: `xn-video ${body.result[2].url}`, buttonText: { displayText: 'Third Video📽️' }, type: 1 }
+                                ]
+                                let buttonMessage = {
+                                    image: { url: D_E_TMB },
+                                    caption: caption,
+                                    footer: conn.user.name,
+                                    buttons: buttons,
+                                    headerType: 4
+                                }
+                                return conn.sendMessage(m.chat, buttonMessage, { quoted: m })
                             }else if (body.status == false) {     
                                 replay("From zenzapis:\n  " + Italic(body.message))
                                 return console.error("From zenzapis:\n  " + err);
@@ -4333,7 +4345,19 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                                     caption += `⭔ Thumb : ${i.thumb}\n`
                                     caption += `⭔ Url : ${i.url}\n\n`
                                 }
-                                conn.sendMessage(m.chat, { imagevideo: { url: D_E_TMB }, mimetype: 'image/jpg', fileName: "D_E-TMB.jpg", caption: caption}, { quoted: m })
+                                let buttons = [
+                                    { buttonId: `xv-video ${body.result[0].url}`, buttonText: { displayText: 'First Video📽️' }, type: 1 },
+                                    { buttonId: `xv-video ${body.result[1].url}`, buttonText: { displayText: 'Second Video📽️' }, type: 1 },
+                                    { buttonId: `xv-video ${body.result[2].url}`, buttonText: { displayText: 'Third Video📽️' }, type: 1 }
+                                ]
+                                let buttonMessage = {
+                                    image: { url: D_E_TMB },
+                                    caption: caption,
+                                    footer: conn.user.name,
+                                    buttons: buttons,
+                                    headerType: 4
+                                }
+                                return conn.sendMessage(m.chat, buttonMessage, { quoted: m })
                             }else if (body.status == false) {     
                                 replay("From zenzapis:\n  " + Italic(body.message))
                                 return console.error("From zenzapis:\n  " + err);
