@@ -4298,9 +4298,9 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                             if (body.status == "OK"){
                                 let caption = `Xnxx Search Query : ${text}\n\n`
                                 for (i in body.result) {
-                                    caption += `⭔ Title : ${i.title}\n`
-                                    caption += `⭔ Thumb : ${i.thumb}\n`
-                                    caption += `⭔ Url : ${i.url}\n\n`
+                                    caption += `⭔ Title : ${body.result[i].title}\n`
+                                    caption += `⭔ Thumb : ${body.result[i].thumb}\n`
+                                    caption += `⭔ Url : ${body.result[i].url}\n\n`
                                 }
                                 let buttons = [
                                     { buttonId: `xn-video ${body.result[0].url}`, buttonText: { displayText: 'First Video📽️' }, type: 1 },
@@ -4340,10 +4340,10 @@ And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`, u
                             if (body.status == "OK"){
                                 let caption = `Xvideos Search Query : ${text}\n\n`
                                 for (i in body.result) {
-                                    caption += `⭔ Title : ${i.title}\n`
-                                    caption += `⭔ Time : ${i.duration}\n`
-                                    caption += `⭔ Thumb : ${i.thumb}\n`
-                                    caption += `⭔ Url : ${i.url}\n\n`
+                                    caption += `⭔ Title : ${body.result[i].title}\n`
+                                    caption += `⭔ Time : ${body.result[i].duration}\n`
+                                    caption += `⭔ Thumb : ${body.result[i].thumb}\n`
+                                    caption += `⭔ Url : ${body.result[i].url}\n\n`
                                 }
                                 let buttons = [
                                     { buttonId: `xv-video ${body.result[0].url}`, buttonText: { displayText: 'First Video📽️' }, type: 1 },
