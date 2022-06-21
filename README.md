@@ -83,7 +83,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 ## `Available Features`
 
-- Owner Name [Here](https://github.com/zeqanpx/Queen_Jennifer_MD)
+- discover more features [Here](https://github.com/zeqanpx/Queen_Jennifer_MD) `It's Creating`
 <!-- 
 | Features |  Availability |
 | :------: |  :----------: |
