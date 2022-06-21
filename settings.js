@@ -15,11 +15,11 @@ global.APIs = {
 
 //Api Key\\
 global.APIKeys = {
-	'https://zenzapis.xyz': 'sanzychan01', //credit goes to sanzy yt, if api key expire, buy it and put it here?\\
+	'https://zenzapis.xyz': 'YOUR_API_KEY', //credit goes to sanzy yt, if api key expire, buy it and put it here?\\
 }
 
 //customize settings\\
-global.owner = ['94761539856']
+global.owner = ['94761539856'] // Your Number
 global.premium = ['94761539856']
 global.ownernomer = '94761539856'
 global.ownername = 'Dark_Ezio'
