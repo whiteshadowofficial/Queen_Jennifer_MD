@@ -1,9 +1,7 @@
 
 # Queen Jennifer MD Whats-app user bot
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/AiDarkEzio/Whats-Bot/master/GojoMedia/D_E-DPC.jpg" alt="ADE" width="350" high="350"/>
-</p>
+[![ADE](https://raw.githubusercontent.com/AiDarkEzio/Whats-Bot/master/GojoMedia/D_E-DPC.jpg)](https://youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ)
 
 - WhatsApp Using Lib Baileys Multi Device Public Bot - Makes it easy and fun to use Whatsapp. Also  userbot for Whatsapp
 
@@ -12,7 +10,6 @@
 ``We will always remember you..``
 
 - [Subadra Bro](https://github.com/AiDarkEzio)
-
 
 ## Readme
 
@@ -32,19 +29,18 @@
 
 ## Run
 
-<b><details><summary>Run via Heroku</summary></b>
+### `Run via Heroku`
 
-* Scan QR In Your Whatsapp From [Here](https://replit.com/@nexusNw/Md-Scanner?outputonly=1&lite=1)
-* Fork This Repo By Clicking [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/fork)
-* then Deploy The Bot From [Here](https://heroku.com/deploy)
-* Wait 5-10 Min To Deploy 
-* After Deploying On The Worker And Check The Logs
+- Scan QR In Your Whatsapp From [Here](https://replit.com/@nexusNw/Md-Scanner?outputonly=1&lite=1)
+- Fork This Repo By Clicking [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/fork)
+- then Deploy The Bot From [Here](https://heroku.com/deploy)
+- Wait 5-10 Min To Deploy
+- After Deploying On The Worker And Check The Logs
 
-</details>
-
-<b><details><summary>Or Installation on Termux</summary></b>
+### `Or Installation on Termux`
   
 ```bash
+
 > apt update
 > apt upgrade
 > pkg update && pkg upgrade
@@ -58,41 +54,37 @@
 > git clone https://github.com/zeqanpx/Queen_Jennifer_MD
 > cd Queen_Jennifer_MD
 > npm install
+
 ```
-  
-</details>
 
-<b><details><summary>Edit settings.js</summary></b>
-  
-  > **Dont't Edit Eniting⚠**
-  
-  ## `SETTING`
+## `Edit settings`
 
-  - API_KEY [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/blob/master/settings.js#L1)
-  - Owner Number [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/blob/master/settings.js#L1)
-  - Owner Name [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/blob/master/settings.js#L1)
+- API_KEY [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/blob/master/settings.js#L1)
+- Owner Number [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/blob/master/settings.js#L1)
+- Owner Name [Here](https://github.com/zeqanpx/Queen_Jennifer_MD/blob/master/settings.js#L1)
   
-  ```bash
-  global.APIKeys = {
-    'https://zenzapis.xyz': 'YOURAPIKEY',
-  }
+```bash
+global.APIKeys = {
+'https://zenzapis.xyz': 'YOURAPIKEY',
+}
 
-  global.owner = ["947XXXXXX"]
-  global.ownername = ["YourName"]
+global.owner = ["947XXXXXX"]
+global.ownername = ["YourName"]
+
 ```
-  
-</details>
 
-<b><details><summary>For 24 Hours Activation</summary></b>
+> **Dont't Edit Eniting⚠**
+
+## `For 24 Hours Activation`
 
 ```bash
 npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 ```
 
-</details>
+## `Available Features`
 
-<b><details><summary>Available Features</summary><br>
-	
+- Owner Name [Here](https://github.com/zeqanpx/Queen_Jennifer_MD)
+<!-- 
 | Features |  Availability |
 | :------: |  :----------: |
 |   Convert     |       ✅     |
@@ -110,27 +102,19 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 |   Random Image     |       ✅     |
 |   Nekos Life     |       ✅      |
 |   More Nsfw     |       ✅      |
-|   Creator     |       ✅      |
-
-</details>
-  
-<b><details><summary>Contact Owner</summary></b>
+|   Creator     |       ✅      | -->
 
 ## ```Connect With Me```
-<p align="center">
-<a href="https://wa.me/94761539856"><img src="https://img.shields.io/badge/Contact Dark Ezio-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
-<a href="https://youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ"><img src="https://img.shields.io/badge/Subscribe Nexus-ff0000?style=for-the-badge&logo=youtube&logoColor=ff000000&link=https://youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ" /><br>
-</p>
 
-</details>
+[![Run on Repl.it](https://img.shields.io/badge/Contact_Dark_Ezio-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/94761539856)
 
- <hr>
+[![Run on Repl.it](https://img.shields.io/badge/Subscribe->Subadra_Bro-ff0000?style=for-the-badge&logo=youtube&logoColor=ff000000&link=https://youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ)](https://youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ)
 
 ## Thanks To
-* [`@adiwajshing/baileys`](https://github.com/adiwajshing/baileys)
-* [`Alien-Alfa`](https://github.com/Alien-Alfa)
-* [`DGXeon`](https://github.com/DGXeon)
-* [`AflahXrd`](https://github.com/nexusNw)
 
+- [`@adiwajshing/baileys`](https://github.com/adiwajshing/baileys)
+- [`Alien-Alfa`](https://github.com/Alien-Alfa)
+- [`DGXeon`](https://github.com/DGXeon)
+- [`AflahXrd`](https://github.com/nexusNw)
 
-License: [MIT]
+### License: [MIT]
